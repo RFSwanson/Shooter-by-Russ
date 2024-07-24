@@ -22,7 +22,7 @@ while run:
     pygame.display.update()
 
 pygame.quit()
-"""try moving player class to a separate file."""
+"""make a pygame.group for payer and use it in the blit function."""
 
 
 
