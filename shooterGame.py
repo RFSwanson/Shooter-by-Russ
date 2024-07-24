@@ -1,18 +1,10 @@
 import pygame
 pygame.init()
+from player import Soldier
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = int(800 * 0.8)
 
-class Soldier(pygame.sprite.Sprite):
-    def __init__(self,x,y,scale):
-        pygame.sprite.Sprite.__init__(self)
-        img = pygame.image.load("img/player/Idle/0.png")
-        self.image = pygame.transform.scale(img,(int(img.get_width()) * scale,int(img.get_height())* scale))
-        self.rect = self.image.get_rect()
-        self.rect.center = (x,y)
-    def draw(self):
-        screen.blit(self.image,self.rect)
 
 player = Soldier(200,200,3)
 player2 = Soldier(400,200,3)
@@ -22,15 +14,15 @@ pygame.display.set_caption("ShooterGame")
 
 run=True
 while run:
-    player.draw()
-    player2.draw()
+    screen.blit(player.image,player.rect)
+    screen.blit(player2.image,player2.rect)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
     pygame.display.update()
 
 pygame.quit()
-
+"""try moving player class to a separate file."""
 
 
 
