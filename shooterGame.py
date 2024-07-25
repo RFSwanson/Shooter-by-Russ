@@ -19,7 +19,7 @@ FPS = 60
 class ShooterGame(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.player = Soldier(self,200,200,3)
+        self.player = Soldier(self,200,200,3,10) #params=x,y,scale,speed
         self.player_group = pygame.sprite.Group()
         self.player_group.add(self.player)
         self.moving_left = False
@@ -30,10 +30,12 @@ class ShooterGame(pygame.sprite.Sprite):
         run=True        
         while run:
             clock.tick(FPS)
-            screen.blit(bg_image,bg_rect)
-            self.player.move()
+            screen.blit(bg_image,bg_rect) #blit background image to screen
+            self.player.move() 
+            #self.player_group.draw(screen)
             for entity in self.player_group:
-                screen.blit(entity.image,entity.rect)
+                #screen.blit(entity.image,entity.rect)
+                screen.blit(pygame.transform.flip(entity.image,self.player.flip,False),entity.rect)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -43,6 +45,8 @@ class ShooterGame(pygame.sprite.Sprite):
                         self.moving_right = True
                     if event.key == pygame.K_LEFT:
                         self.moving_left = True
+                    if event.key == pygame.K_ESCAPE:
+                        run = False
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_RIGHT:
                         self.moving_right = False
